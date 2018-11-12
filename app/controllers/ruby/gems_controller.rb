@@ -3,7 +3,9 @@ class Ruby::GemsController < ApplicationController
 
   def show
     @name = params[:name]
-    @repositories = Revision::Ruby::Specification.where(name: @name).joins(:revision_dependency_file => {:revisions => :github_repositories} )
+    specifications = Revision::Ruby::Specification.where(name: @name).joins(:revision_dependency_file)
+
+
   end
 
   private
