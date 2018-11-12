@@ -40,6 +40,13 @@ describe Ruby::GemsController, type: :request do
         revision = create(:revision, repository: repository, status: :done)
         dependency_file = create(:revision_dependency_file, :gemfile_lock, revision: revision)
         dependency_file.revision_ruby_specifications.create!(name: gem_name, version: '5.2.0', platform: 'ruby')
+        dependency_file.revision_ruby_specifications.create!(name: 'rspec', version: '5.2.0', platform: 'ruby')
+        revision.update_revision
+
+        # old revision
+        revision = create(:revision, repository: repository, status: :done)
+        dependency_file = create(:revision_dependency_file, :gemfile_lock, revision: revision)
+        dependency_file.revision_ruby_specifications.create!(name: gem_name, version: '5.1.0', platform: 'ruby')
 
         subject
 
